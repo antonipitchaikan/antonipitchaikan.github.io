@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antoni Pitchaikan - Hybrid Technologist | HR • Analytics • Engineering</title>
-    <meta name="description" content="Transforming HR through intelligent automation. Hybrid technologist specializing in AI-powered solutions, data analytics, and software engineering.">
-    
+    <meta name="description"
+        content="Transforming HR through intelligent automation. Hybrid technologist specializing in AI-powered solutions, data analytics, and software engineering.">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Sans+Pro:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    
+
+    <!-- Main Script -->
+    <script src="main.js" defer></script>
+
     <style>
         :root {
             --primary-charcoal: #1a1a1a;
@@ -25,8 +32,8 @@
             --background-white: #ffffff;
             --text-light: #f7fafc;
             --border-subtle: rgba(212, 165, 116, 0.1);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         * {
@@ -113,37 +120,74 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(26,26,26,0.7) 0%, rgba(74,85,104,0.5) 100%), url('resources/hero-workspace.png');
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(74, 85, 104, 0.5) 100%), url('resources/hero-workspace.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            text-align: center;
         }
 
         .hero-container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            /* Grid removed for centered layout */
         }
 
         .hero-content {
             color: var(--text-light);
+            width: 100%;
         }
 
+        /* Name Section Styling */
         .hero-title {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            /* Larger font size */
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
+
+            /* Animation Initial State */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards 0.3s;
+
+            /* Hover Transition */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            /* Required for transform */
+        }
+
+        /* Hover Effect for Name */
+        .hero-title:hover {
+            transform: scale(1.05) translateY(-5px);
+            text-shadow: 0 0 20px rgba(212, 165, 116, 0.6);
+            background: linear-gradient(to right, #ffffff, var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: default;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
             opacity: 0.9;
         }
@@ -154,18 +198,22 @@
         }
 
         .hero-description {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             margin-bottom: 2.5rem;
-            opacity: 0.85;
-            max-width: 500px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
         }
 
         .cta-button {
             display: inline-block;
             background: var(--accent-amber);
             color: var(--primary-charcoal);
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            /* Slightly rounder for modern look */
             text-decoration: none;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
@@ -177,29 +225,8 @@
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.4);
             background: #c19660;
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 500px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
         }
 
         /* Experience Timeline */
@@ -405,6 +432,21 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Updates for Institution Logo Alignment */
+        .institution-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .institution-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
         .education-card .location {
             color: var(--secondary-slate);
             font-size: 0.9rem;
@@ -558,11 +600,13 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">Antoni Pitchaikan</a>
+            <!-- UPDATED: Changed from Name to Welcome -->
+            <a href="#home" class="nav-logo">Welcome</a>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
@@ -576,21 +620,18 @@
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Hybrid Technologist</h1>
+                <h1 class="hero-title">Antoni Pitchaikan</h1>
+
                 <p class="hero-subtitle">
                     <span class="typewriter" id="typewriter"></span>
                 </p>
+
                 <p class="hero-description">
-                    Transforming traditional HR functions into intelligent, automated ecosystems. 
-                    I build AI-powered solutions that make work more efficient, data more actionable, 
+                    Transforming traditional HR functions into intelligent, automated ecosystems.
+                    I build AI-powered solutions that make work more efficient, data more actionable,
                     and organizations more human-centric.
                 </p>
                 <a href="projects.html" class="cta-button">Explore My Work</a>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-image">
-                    Professional Workspace
-                </div>
             </div>
         </div>
     </section>
@@ -612,13 +653,19 @@
                         </div>
                         <div class="timeline-content">
                             <p class="timeline-description">
-                                Discovered how technology could amplify human potential in pharmaceutical HR operations. 
-                                Led digital transformation initiatives that redefined employee experience through data-driven solutions.
+                                Discovered how technological innovation and analytics could amplify human potential in
+                                HR operations.
+                                Led digital transformation initiatives that redefined employee experience through
+                                data-driven solutions.
                             </p>
                             <ul class="achievements">
-                                <li>Digitized learning programs, boosting completion rates by <span class="metric">35% ↑</span></li>
-                                <li>Engineered automated HR systems, cutting manual workload by <span class="metric">30% ↓</span></li>
-                                <li>Enhanced onboarding experience, achieving <span class="metric">20% ↑</span> satisfaction gains</li>
+                                <li>Created and led learning and development programs for various departments,
+                                    organizing SDP (Supervisor Development Program) & MDP (Managerial Development
+                                    Program)</li>
+                                <li>Engineered automated HR systems, cutting manual workload by <span class="metric">30%
+                                        ↓</span></li>
+                                <li>Enhanced onboarding experience, achieving <span class="metric">20% ↑</span>
+                                    satisfaction gains</li>
                                 <li>Implemented data-driven iteration processes for continuous improvement</li>
                             </ul>
                         </div>
@@ -637,11 +684,13 @@
                         </div>
                         <div class="timeline-content">
                             <p class="timeline-description">
-                                Architecting the future of HR operations through AI-powered automation and intelligent systems. 
+                                Architecting the future of HR operations through AI-powered automation and intelligent
+                                systems.
                                 Building enterprise-grade solutions that eliminate friction in the workplace.
                             </p>
                             <ul class="achievements">
-                                <li>Built <strong>Luna</strong> - enterprise chatbot with natural language reasoning and MCP</li>
+                                <li>Built <strong>Luna</strong> - enterprise chatbot with natural language reasoning and
+                                    MCP</li>
                                 <li>Automated complex workflows: email management and calendar orchestration</li>
                                 <li>Engineered ESG reporting with live Belgian public holidays API integration</li>
                                 <li>Created automated marketing budget consolidation system</li>
@@ -664,17 +713,21 @@
                     <div class="location">Clermont-Ferrand, France</div>
                     <div class="degree">MSc Business Intelligence & Analytics</div>
                 </div>
+
+                <!-- UPDATED: Karunya Institute MBA with Briefcase Symbol -->
                 <div class="education-card fade-in">
-                    <div class="education-icon">📊</div>
-                    <h3>Karunya Institute</h3>
+                    <div class="education-icon">💼</div>
+                    <h3>Karunya Institute of Technology and Science</h3>
                     <div class="location">Tamil Nadu, India</div>
                     <div class="degree">Master of Business Administration (MBA)</div>
                 </div>
+
+                <!-- UPDATED: Karunya Institute Engineering with Gear Symbol -->
                 <div class="education-card fade-in">
                     <div class="education-icon">⚙️</div>
-                    <h3>Karunya Institute</h3>
+                    <h3>Karunya Institute of Technology and Science</h3>
                     <div class="location">Tamil Nadu, India</div>
-                    <div class="degree">Bachelor of Mechanical Engineering</div>
+                    <div class="degree">Bachelor of Technology – Engineering</div>
                 </div>
             </div>
         </div>
@@ -706,12 +759,14 @@
                 <a href="mailto:antoni.pitchaikan2@gmail.com" class="social-link" title="Email">
                     📧
                 </a>
-                <a href="https://linkedin.com/in/antoni-pitchaikan" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                <a href="https://linkedin.com/in/antoni-pitchaikan" target="_blank" rel="noopener" class="social-link"
+                    title="LinkedIn">
                     💼
                 </a>
             </div>
+            <!-- UPDATED: Span added for JS year targeting -->
             <p class="footer-text">
-                © 2024 Antoni Pitchaikan. Building technology that serves people.
+                © <span class="current-year">2026</span> Antoni Pitchaikan. Building technology that serves people.
             </p>
         </div>
     </footer>
@@ -721,9 +776,10 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // Typewriter Effect
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const typed = new Typed('#typewriter', {
                 strings: [
+                    'HYBRID TECHNOLOGIST',
                     'ANALYST',
                     'HUMAN RESOURCE',
                     'DEVELOPER',
@@ -746,17 +802,17 @@
                     scrub: 1
                 }
             })
-            .to('.timeline-item', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                stagger: 0.3,
-                ease: 'power2.out'
-            });
+                .to('.timeline-item', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.3,
+                    ease: 'power2.out'
+                });
 
             // Fade in animations
             gsap.utils.toArray('.fade-in').forEach((element) => {
-                gsap.fromTo(element, 
+                gsap.fromTo(element,
                     { opacity: 0, y: 30 },
                     {
                         opacity: 1,
@@ -774,7 +830,7 @@
 
             // Scale in animations
             gsap.utils.toArray('.scale-in').forEach((element) => {
-                gsap.fromTo(element, 
+                gsap.fromTo(element,
                     { opacity: 0, scale: 0.8 },
                     {
                         opacity: 1,
@@ -793,7 +849,7 @@
             // Navigation active state
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function () {
                     navLinks.forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
                 });
@@ -816,7 +872,7 @@
             // Timeline card interactions
             const timelineCards = document.querySelectorAll('.timeline-card');
             timelineCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
+                card.addEventListener('mouseenter', function () {
                     anime({
                         targets: this,
                         scale: 1.02,
@@ -825,7 +881,7 @@
                     });
                 });
 
-                card.addEventListener('mouseleave', function() {
+                card.addEventListener('mouseleave', function () {
                     anime({
                         targets: this,
                         scale: 1,
@@ -836,7 +892,7 @@
             });
 
             // Education cards stagger animation
-            gsap.fromTo('.education-card', 
+            gsap.fromTo('.education-card',
                 { opacity: 0, y: 30 },
                 {
                     opacity: 1,
@@ -853,7 +909,7 @@
             );
 
             // Badge items animation
-            gsap.fromTo('.badge-item', 
+            gsap.fromTo('.badge-item',
                 { opacity: 0, scale: 0.8, rotation: -10 },
                 {
                     opacity: 1,
@@ -874,11 +930,11 @@
         // Magnetic cursor effect for CTA button
         const ctaButton = document.querySelector('.cta-button');
         if (ctaButton) {
-            ctaButton.addEventListener('mousemove', function(e) {
+            ctaButton.addEventListener('mousemove', function (e) {
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                
+
                 anime({
                     targets: this,
                     translateX: x * 0.1,
@@ -888,7 +944,7 @@
                 });
             });
 
-            ctaButton.addEventListener('mouseleave', function() {
+            ctaButton.addEventListener('mouseleave', function () {
                 anime({
                     targets: this,
                     translateX: 0,
@@ -900,4 +956,5 @@
         }
     </script>
 </body>
+
 </html>
