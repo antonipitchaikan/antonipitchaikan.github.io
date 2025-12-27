@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills - Antoni Pitchaikan | Technical Proficiency</title>
-    <meta name="description" content="Interactive skills visualization showcasing expertise in Automation, AI/ML, Analytics, HR Domain, Engineering, and Collaboration.">
-    
+    <title>Skills - Antoni Pitchaikan</title>
+    <meta name="description" content="Core competencies in Automation, AI, Data Analytics, and Professional Skills.">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
-    
+
+    <!-- Main Script -->
+    <script src="main.js" defer></script>
+
     <style>
         :root {
             --primary-charcoal: #1a1a1a;
             --accent-amber: #d4a574;
             --secondary-slate: #4a5568;
             --background-white: #ffffff;
-            --text-light: #f7fafc;
-            --border-subtle: rgba(212, 165, 116, 0.1);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --section-bg: #fafafa;
+            --bullet-color: #d4a574;
         }
 
         * {
@@ -37,28 +39,29 @@
 
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            line-height: 1.6;
             color: var(--primary-charcoal);
             background: var(--background-white);
+            line-height: 1.6;
             overflow-x: hidden;
+            font-size: 18px;
+            /* Increased base font size for visibility */
         }
 
-        /* Navigation */
+        /* --- Minimal Navigation --- */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -69,7 +72,7 @@
         .nav-logo {
             font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary-charcoal);
             text-decoration: none;
         }
@@ -77,432 +80,162 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
             font-family: 'Inter', sans-serif;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--secondary-slate);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            position: relative;
+            font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
         .nav-link:hover,
         .nav-link.active {
             color: var(--accent-amber);
-            background: rgba(212, 165, 116, 0.1);
         }
 
-        .nav-link.active::after {
+        /* --- Page Layout --- */
+        .skills-page {
+            max-width: 900px;
+            /* Narrower container for better readability */
+            margin: 0 auto;
+            padding: 140px 2rem 6rem;
+        }
+
+        .page-header {
+            margin-bottom: 5rem;
+            border-bottom: 2px solid var(--accent-amber);
+            padding-bottom: 2rem;
+            opacity: 0;
+            /* For animation */
+            transform: translateY(20px);
+        }
+
+        .page-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-slate);
+        }
+
+        /* --- Skills Section Styles --- */
+        .skill-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            /* Animated in */
+            transform: translateY(30px);
+        }
+
+        .section-heading {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-charcoal);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .section-heading::before {
             content: '';
             position: absolute;
-            bottom: -1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 2px;
+            left: 0;
+            height: 100%;
+            width: 4px;
             background: var(--accent-amber);
+            border-radius: 2px;
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 8rem 0 4rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            text-align: center;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .hero-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-charcoal);
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--secondary-slate);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Skills Visualization */
-        .skills-section {
-            padding: 4rem 0 6rem;
-            background: var(--background-white);
-        }
-
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .skills-layout {
+        .skills-list {
+            list-style: none;
+            padding: 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-top: 3rem;
-        }
-
-        .radar-container {
-            background: var(--background-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            position: sticky;
-            top: 120px;
-        }
-
-        .radar-title {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--primary-charcoal);
-        }
-
-        .chart-container {
-            position: relative;
-            height: 400px;
-            margin-bottom: 1rem;
-        }
-
-        .skills-details {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--background-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .skill-category.active {
-            border-color: var(--accent-amber);
-            box-shadow: 0 0 0 2px rgba(212, 165, 116, 0.2);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .category-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-amber);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .category-info h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .category-level {
-            color: var(--secondary-slate);
-            font-size: 0.9rem;
-        }
-
-        .category-description {
-            color: var(--secondary-slate);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            /* Two columns for readability */
+            column-gap: 4rem;
+            row-gap: 1.2rem;
         }
 
         .skill-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .skill-name {
-            font-weight: 600;
-            color: var(--primary-charcoal);
-        }
-
-        .skill-proficiency {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .proficiency-bar {
-            width: 60px;
-            height: 6px;
-            background: #e9ecef;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .proficiency-fill {
-            height: 100%;
-            background: var(--accent-amber);
-            border-radius: 3px;
-            transition: width 1s ease-out;
-            width: 0;
-        }
-
-        .proficiency-text {
-            font-size: 0.8rem;
-            color: var(--secondary-slate);
-            font-weight: 600;
-            min-width: 30px;
-        }
-
-        /* Technical Stack Section */
-        .tech-stack {
-            padding: 6rem 0;
-            background: #f8f9fa;
-        }
-
-        .tech-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tech-category {
-            background: var(--background-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .tech-category h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-charcoal);
-        }
-
-        .tech-category p {
-            color: var(--secondary-slate);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .tech-tools {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-
-        .tech-tool {
-            background: var(--accent-amber);
-            color: var(--primary-charcoal);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Certifications Section */
-        .certifications {
-            padding: 6rem 0;
-            background: var(--background-white);
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .certification-card {
-            background: var(--background-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .certification-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .cert-badge {
-            width: 80px;
-            height: 80px;
-            background: var(--secondary-slate);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .certification-card h3 {
-            font-family: 'Inter', sans-serif;
+            position: relative;
+            padding-left: 2rem;
+            /* Space for the arrow */
             font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .certification-card .issuer {
             color: var(--secondary-slate);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: default;
+            opacity: 0;
+            /* For stagger animation */
+            transform: translateX(-10px);
         }
 
-        .certification-card .date {
+        /* Arrow/Bullet Styling */
+        .skill-item::before {
+            content: "→";
+            /* Arrow mark */
             color: var(--accent-amber);
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: bold;
+            font-size: 1.4rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            line-height: 1.5;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.7;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--primary-charcoal);
-            color: var(--text-light);
-            padding: 3rem 0 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--secondary-slate);
-            border-radius: 50%;
-            color: var(--text-light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--accent-amber);
+        /* Hover Animation: Item Shift + Arrow Move */
+        .skill-item:hover {
             color: var(--primary-charcoal);
-            transform: translateY(-2px);
+            transform: translateX(10px);
+            /* Whole item moves right */
         }
 
-        .footer-text {
-            opacity: 0.8;
+        .skill-item:hover::before {
+            transform: translateX(5px) scale(1.2);
+            /* Arrow moves further right and grows */
+            opacity: 1;
+            color: #b8864b;
+            /* Slightly darker amber */
         }
 
-        /* Mobile Responsive */
+        /* --- Responsive --- */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
             }
 
-            .skills-layout {
+            .skills-page {
+                padding-top: 100px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .skills-list {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1rem;
             }
-
-            .radar-container {
-                position: static;
-            }
-
-            .tech-categories {
-                grid-template-columns: 1fr;
-            }
-
-            .certifications-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation Classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.8);
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation -->
+
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Antoni Pitchaikan</a>
@@ -515,564 +248,95 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">Technical Skills</h1>
-            <p class="hero-subtitle">
-                Hybrid expertise spanning automation, AI/ML, analytics, HR domain knowledge, 
-                engineering, and cross-functional collaboration.
-            </p>
-        </div>
-    </section>
+    <main class="skills-page">
+        <header class="page-header">
+            <h1 class="page-title">Skills & Competencies</h1>
+            <p class="page-subtitle">Core technical capabilities and professional strengths.</p>
+        </header>
 
-    <!-- Skills Visualization -->
-    <section class="skills-section">
-        <div class="section-container">
-            <div class="skills-layout">
-                <!-- Radar Chart -->
-                <div class="radar-container">
-                    <h3 class="radar-title">Skills Radar</h3>
-                    <div class="chart-container">
-                        <canvas id="skillsRadar"></canvas>
-                    </div>
-                    <p style="text-align: center; color: var(--secondary-slate); font-size: 0.9rem; margin-top: 1rem;">
-                        Interactive visualization of technical proficiency across key domains
-                    </p>
-                </div>
+        <!-- AI & Automation -->
+        <section class="skill-section">
+            <h2 class="section-heading">AI & Automation</h2>
+            <ul class="skills-list">
+                <li class="skill-item">Chatbot Building (NLP & Reasoning)</li>
+                <li class="skill-item">Microsoft Azure AI Services</li>
+                <li class="skill-item">AI API Integration</li>
+                <li class="skill-item">Workflow Automation</li>
+                <li class="skill-item">Process Orchestration</li>
+                <li class="skill-item">Microsoft Copilot 365</li>
+            </ul>
+        </section>
 
-                <!-- Skills Details -->
-                <div class="skills-details">
-                    <!-- Automation -->
-                    <div class="skill-category fade-in" data-category="automation">
-                        <div class="category-header">
-                            <div class="category-icon">⚙️</div>
-                            <div class="category-info">
-                                <h3>Automation</h3>
-                                <div class="category-level">Expert Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Building intelligent automation solutions that eliminate manual processes and 
-                            create efficient workflows across HR and business operations.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">VBA</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="95"></div>
-                                    </div>
-                                    <span class="proficiency-text">95%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Power Query</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="90"></div>
-                                    </div>
-                                    <span class="proficiency-text">90%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Macros</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="88"></div>
-                                    </div>
-                                    <span class="proficiency-text">88%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Technical & Data -->
+        <section class="skill-section">
+            <h2 class="section-heading">Technical & Data</h2>
+            <ul class="skills-list">
+                <li class="skill-item">VBA & Macros</li>
+                <li class="skill-item">Power Query (ETL)</li>
+                <li class="skill-item">Data Transformation</li>
+                <li class="skill-item">JSON Configuration</li>
+                <li class="skill-item">Data Visualization</li>
+                <li class="skill-item">SQL Fundamentals</li>
+            </ul>
+        </section>
 
-                    <!-- AI/ML -->
-                    <div class="skill-category fade-in" data-category="ai-ml">
-                        <div class="category-header">
-                            <div class="category-icon">🤖</div>
-                            <div class="category-info">
-                                <h3>AI/ML</h3>
-                                <div class="category-level">Advanced Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Developing AI-powered solutions and machine learning models to solve complex 
-                            business challenges and enhance decision-making processes.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Chatbot Development</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="85"></div>
-                                    </div>
-                                    <span class="proficiency-text">85%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Azure AI</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="80"></div>
-                                    </div>
-                                    <span class="proficiency-text">80%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">API Integration</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="92"></div>
-                                    </div>
-                                    <span class="proficiency-text">92%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Professional -->
+        <section class="skill-section">
+            <h2 class="section-heading">Professional Skills</h2>
+            <ul class="skills-list">
+                <li class="skill-item">Complex Problem Solving</li>
+                <li class="skill-item">Learning & Development (L&D)</li>
+                <li class="skill-item">Cross-functional Collaboration</li>
+                <li class="skill-item">Stakeholder Management</li>
+                <li class="skill-item">Strategic Planning</li>
+            </ul>
+        </section>
 
-                    <!-- Analytics -->
-                    <div class="skill-category fade-in" data-category="analytics">
-                        <div class="category-header">
-                            <div class="category-icon">📊</div>
-                            <div class="category-info">
-                                <h3>Analytics</h3>
-                                <div class="category-level">Expert Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Transforming complex data into actionable insights through advanced analytics, 
-                            visualization, and business intelligence solutions.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Data Visualization</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="93"></div>
-                                    </div>
-                                    <span class="proficiency-text">93%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Tableau</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="87"></div>
-                                    </div>
-                                    <span class="proficiency-text">87%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Power BI</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="85"></div>
-                                    </div>
-                                    <span class="proficiency-text">85%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- HR Domain -->
-                    <div class="skill-category fade-in" data-category="hr">
-                        <div class="category-header">
-                            <div class="category-icon">👥</div>
-                            <div class="category-info">
-                                <h3>HR Domain</h3>
-                                <div class="category-level">Expert Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Deep expertise in human resources operations, learning & development, 
-                            and stakeholder management with a focus on technology-driven solutions.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Learning & Development</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="95"></div>
-                                    </div>
-                                    <span class="proficiency-text">95%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Stakeholder Management</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="90"></div>
-                                    </div>
-                                    <span class="proficiency-text">90%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">HR Operations</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="88"></div>
-                                    </div>
-                                    <span class="proficiency-text">88%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Engineering -->
-                    <div class="skill-category fade-in" data-category="engineering">
-                        <div class="category-header">
-                            <div class="category-icon">💻</div>
-                            <div class="category-info">
-                                <h3>Engineering</h3>
-                                <div class="category-level">Advanced Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Software engineering expertise with focus on workflow orchestration, 
-                            system integration, and scalable solution architecture.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">JSON</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="90"></div>
-                                    </div>
-                                    <span class="proficiency-text">90%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Workflow Orchestration</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="85"></div>
-                                    </div>
-                                    <span class="proficiency-text">85%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">System Integration</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="82"></div>
-                                    </div>
-                                    <span class="proficiency-text">82%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Collaboration -->
-                    <div class="skill-category fade-in" data-category="collaboration">
-                        <div class="category-header">
-                            <div class="category-icon">🤝</div>
-                            <div class="category-info">
-                                <h3>Collaboration</h3>
-                                <div class="category-level">Expert Level</div>
-                            </div>
-                        </div>
-                        <p class="category-description">
-                            Cross-functional collaboration and communication skills essential for 
-                            driving digital transformation initiatives across global organizations.
-                        </p>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Cross-functional Teams</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="92"></div>
-                                    </div>
-                                    <span class="proficiency-text">92%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Microsoft Copilot</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="88"></div>
-                                    </div>
-                                    <span class="proficiency-text">88%</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Global Collaboration</span>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" data-width="90"></div>
-                                    </div>
-                                    <span class="proficiency-text">90%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Stack -->
-    <section class="tech-stack">
-        <div class="section-container">
-            <h2 class="section-title">Technical Stack</h2>
-            <div class="tech-categories">
-                <div class="tech-category scale-in">
-                    <h3>Foundational</h3>
-                    <p>Core technologies for automation and data processing</p>
-                    <div class="tech-tools">
-                        <span class="tech-tool">VBA</span>
-                        <span class="tech-tool">Power Query</span>
-                        <span class="tech-tool">JSON</span>
-                        <span class="tech-tool">Excel</span>
-                        <span class="tech-tool">SQL</span>
-                    </div>
-                </div>
-
-                <div class="tech-category scale-in">
-                    <h3>Frontier</h3>
-                    <p>Cutting-edge technologies for AI and automation</p>
-                    <div class="tech-tools">
-                        <span class="tech-tool">Azure AI</span>
-                        <span class="tech-tool">API Orchestration</span>
-                        <span class="tech-tool">Chatbot Architecture</span>
-                        <span class="tech-tool">Machine Learning</span>
-                        <span class="tech-tool">Cloud Computing</span>
-                    </div>
-                </div>
-
-                <div class="tech-category scale-in">
-                    <h3>Analytics & BI</h3>
-                    <p>Business intelligence and data visualization tools</p>
-                    <div class="tech-tools">
-                        <span class="tech-tool">Tableau</span>
-                        <span class="tech-tool">Power BI</span>
-                        <span class="tech-tool">Dataiku</span>
-                        <span class="tech-tool">Alteryx</span>
-                        <span class="tech-tool">DAX</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications -->
-    <section class="certifications">
-        <div class="section-container">
-            <h2 class="section-title">Professional Certifications</h2>
-            <div class="certifications-grid">
-                <div class="certification-card scale-in">
-                    <div class="cert-badge">🎯</div>
-                    <h3>Dataiku Core Designer</h3>
-                    <div class="issuer">Dataiku</div>
-                    <div class="date">2023</div>
-                </div>
-
-                <div class="certification-card scale-in">
-                    <div class="cert-badge">🔧</div>
-                    <h3>Alteryx Designer Core</h3>
-                    <div class="issuer">Alteryx</div>
-                    <div class="date">2023</div>
-                </div>
-
-                <div class="certification-card scale-in">
-                    <div class="cert-badge">📊</div>
-                    <h3>Microsoft Power BI</h3>
-                    <div class="issuer">Microsoft</div>
-                    <div class="date">2022</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-social">
-                <a href="mailto:antoni.pitchaikan2@gmail.com" class="social-link" title="Email">
-                    📧
-                </a>
-                <a href="https://linkedin.com/in/antoni-pitchaikan" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
-                    💼
-                </a>
-            </div>
-            <p class="footer-text">
-                © 2024 Antoni Pitchaikan. Building technology that serves people.
-            </p>
-        </div>
-    </footer>
+    </main>
 
     <script>
-        // Initialize GSAP and ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Skills radar chart
-            const ctx = document.getElementById('skillsRadar').getContext('2d');
-            const skillsRadar = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Automation', 'AI/ML', 'Analytics', 'HR Domain', 'Engineering', 'Collaboration'],
-                    datasets: [{
-                        label: 'Proficiency Level',
-                        data: [92, 85, 90, 93, 87, 90],
-                        backgroundColor: 'rgba(212, 165, 116, 0.2)',
-                        borderColor: '#d4a574',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#d4a574',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6,
-                        pointHoverRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                stepSize: 20,
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            pointLabels: {
-                                font: {
-                                    size: 14,
-                                    weight: '600'
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                }
+            // 1. Page Header Entrance
+            gsap.to('.page-header', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
             });
 
-            // Animate proficiency bars
-            const skillCategories = document.querySelectorAll('.skill-category');
-            skillCategories.forEach((category, index) => {
-                gsap.fromTo(category, 
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        delay: index * 0.1,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: category,
-                            start: 'top 80%',
-                            toggleActions: 'play none none reverse'
-                        }
-                    }
-                );
-
-                // Animate proficiency fills when category comes into view
-                ScrollTrigger.create({
-                    trigger: category,
-                    start: 'top 80%',
-                    onEnter: function() {
-                        const fills = category.querySelectorAll('.proficiency-fill');
-                        fills.forEach(fill => {
-                            const targetWidth = fill.getAttribute('data-width');
-                            anime({
-                                targets: fill,
-                                width: targetWidth + '%',
-                                duration: 1000,
-                                delay: 200,
-                                easing: 'easeOutQuad'
-                            });
-                        });
-                    }
-                });
-            });
-
-            // Category hover effects
-            skillCategories.forEach(category => {
-                category.addEventListener('mouseenter', function() {
-                    // Highlight corresponding radar area
-                    const categoryName = this.getAttribute('data-category');
-                    // Add visual feedback
-                    anime({
-                        targets: this,
-                        scale: 1.02,
-                        duration: 300,
-                        easing: 'easeOutQuad'
-                    });
-                });
-
-                category.addEventListener('mouseleave', function() {
-                    anime({
-                        targets: this,
-                        scale: 1,
-                        duration: 300,
-                        easing: 'easeOutQuad'
-                    });
-                });
-            });
-
-            // Technical stack animation
-            gsap.fromTo('.tech-category', 
-                { opacity: 0, scale: 0.8 },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: 'back.out(1.7)',
-                    scrollTrigger: {
-                        trigger: '.tech-categories',
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse'
-                    }
-                }
-            );
-
-            // Certifications animation
-            gsap.fromTo('.certification-card', 
-                { opacity: 0, y: 30 },
-                {
+            // 2. Section Fade Up on Scroll
+            const sections = document.querySelectorAll('.skill-section');
+            sections.forEach((section) => {
+                gsap.to(section, {
                     opacity: 1,
                     y: 0,
                     duration: 0.8,
-                    stagger: 0.15,
-                    ease: 'power2.out',
+                    ease: "power2.out",
                     scrollTrigger: {
-                        trigger: '.certifications-grid',
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                        trigger: section,
+                        start: "top 85%", // Trigger when top of section hits 85% of viewport
+                        toggleActions: "play none none reverse"
                     }
-                }
-            );
-
-            // Navigation active state
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
                 });
-            });
 
-            // Radar chart hover interaction
-            ctx.canvas.addEventListener('mousemove', function(event) {
-                const points = skillsRadar.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
-                if (points.length) {
-                    ctx.canvas.style.cursor = 'pointer';
-                } else {
-                    ctx.canvas.style.cursor = 'default';
-                }
+                // 3. Staggered List Items Entrance
+                const items = section.querySelectorAll('.skill-item');
+                gsap.to(items, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.6,
+                    stagger: 0.1, // Stagger effect for items
+                    ease: "back.out(1.7)", // Subtle bounce effect
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%"
+                    }
+                });
             });
         });
     </script>
 </body>
+
 </html>
